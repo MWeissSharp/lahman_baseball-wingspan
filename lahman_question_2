@@ -1,0 +1,36 @@
+SELECT *
+FROM people
+
+--Question 2:Find the name and height of the shortest player in the database. How many games did he play in? What is the name of the team for which he played?
+
+SELECT playerid,namefirst, namelast, MIN(height)
+FROM people
+group by playerid, namefirst, namelast
+HAVING MIN(height) IS NOT NULL
+ORDER BY MIN(height)
+
+SELECT g_all
+FROM appearances
+WHERE playerid='gaedeed01'
+
+SELECT DISTINCT name
+FROM teams
+WHERE teamid='SLA'
+
+----
+
+
+SELECT namefirst, namelast, MIN(height),
+       (SELECT DISTINCT name
+        FROM teams
+        WHERE teamid='SLA'),
+	   (SELECT g_all
+        FROM appearances
+        WHERE playerid='gaedeed01')
+FROM people
+     INNER JOIN appearances USING(playerid)
+	 INNER JOIN teams USING(teamid)
+GROUP BY playerid, namefirst, namelast
+HAVING MIN(height) IS NOT NULL
+ORDER BY MIN(height)
+
