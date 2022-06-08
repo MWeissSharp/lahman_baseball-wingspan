@@ -9,18 +9,19 @@ SELECT playerid,
 	   yearid,
 	   po,
 	   CASE WHEN pos = 'OF' THEN 'Outfield'
-	   WHEN pos IN('SS', '1B', '2B', '3B') THEN 'Infield'
-	   WHEN pos IN('P', 'C') THEN 'Battery' END as pos_group
+	   		WHEN pos IN('SS', '1B', '2B', '3B') THEN 'Infield'
+	  		WHEN pos IN('P', 'C') THEN 'Battery' END AS pos_group
 FROM fielding AS f LEFT JOIN people AS p USING(playerid);
 --Below provides a table with the number of putouts by each position group in 2016
 WITH grouping AS (SELECT playerid,
 					   yearid,
 					   po,
 					   CASE WHEN pos = 'OF' THEN 'Outfield'
-					   WHEN pos IN('SS', '1B', '2B', '3B') THEN 'Infield'
-					   WHEN pos IN('P', 'C') THEN 'Battery' END as pos_group
+					   		WHEN pos IN('SS', '1B', '2B', '3B') THEN 'Infield'
+					   		WHEN pos IN('P', 'C') THEN 'Battery' END AS pos_group
 				  FROM fielding)
-SELECT pos_group, SUM(po) AS total_putouts
+SELECT pos_group,
+	   SUM(po) AS total_putouts
 FROM grouping
 WHERE yearid = 2016
 GROUP BY pos_group;
