@@ -1,0 +1,71 @@
+------qn:5:
+--Find the average number of strikeouts per game by decade since 1920. 
+--Round the numbers you report to 2 decimal places. 
+--Do the same for home runs per game?
+--Do you see any trends?
+SELECT *
+FROM teams AS t;
+
+SELECT ROUND(AVG(t.so),2)AS avg_strikeout, ROUND(AVG(t.g),2)AS avg_games
+FROM teams AS t
+WHERE t.yearid BETWEEN 1920 AND 1930;
+
+SELECT ROUND(SUM(t.so),2) AS sum_so, ROUND(SUM(t.g),2)AS sum_g 
+FROM teams AS t;
+
+SELECT ROUND(SUM(t.so),2) AS sum_so, ROUND(SUM(t.g),2)AS sum_g, (ROUND(SUM(t.so),2)/ROUND(SUM(t.g),2))AS so_per_game,
+       CASE WHEN t.yearid BETWEEN 1920 AND 1929 THEN '1920s'
+	        WHEN t.yearid BETWEEN 1930 AND 1939 THEN '1930s'
+			WHEN t.yearid BETWEEN 1940 AND 1949 THEN '1940s'
+			WHEN t.yearid BETWEEN 1950 AND 1959 THEN '1950s'
+			WHEN t.yearid BETWEEN 1960 AND 1969 THEN '1960s'
+			WHEN t.yearid BETWEEN 1970 AND 1979 THEN '1970s'
+			WHEN t.yearid BETWEEN 1980 AND 1989 THEN '1980s'
+			WHEN t.yearid BETWEEN 1990 AND 1999 THEN '1990s'
+			WHEN t.yearid BETWEEN 2000 AND 2009 THEN '2000s'
+			WHEN t.yearid BETWEEN 2010 AND 2019 THEN '2010s'
+				   END AS BY_DECADES
+FROM teams AS t
+WHERE yearid BETWEEN 1920 AND 2019
+GROUP BY BY_DECADES
+ORDER BY BY_DECADES DESC;
+
+SELECT ROUND(SUM(t.hr),2)AS sum_hr, ROUND(SUM(t.g),2)AS sum_g, (ROUND(SUM(t.hr),2)/ROUND(SUM(t.g),2))AS hr_per_game,
+       CASE WHEN t.yearid BETWEEN 1920 AND 1929 THEN '1920s'
+	        WHEN t.yearid BETWEEN 1930 AND 1939 THEN '1930s'
+			WHEN t.yearid BETWEEN 1940 AND 1949 THEN '1940s'
+			WHEN t.yearid BETWEEN 1950 AND 1959 THEN '1950s'
+			WHEN t.yearid BETWEEN 1960 AND 1969 THEN '1960s'
+			WHEN t.yearid BETWEEN 1970 AND 1979 THEN '1970s'
+			WHEN t.yearid BETWEEN 1980 AND 1989 THEN '1980s'
+			WHEN t.yearid BETWEEN 1990 AND 1999 THEN '1990s'
+			WHEN t.yearid BETWEEN 2000 AND 2009 THEN '2000s'
+			WHEN t.yearid BETWEEN 2010 AND 2019 THEN '2010s'
+	   END AS HR_BY_DECADES
+FROM teams AS t
+WHERE yearid BETWEEN 1920 AND 2019
+GROUP BY HR_BY_DECADES
+ORDER BY HR_BY_DECADES DESC;
+
+----------------------------
+--HOW TO JOIN THESE TWO TABLES?
+--BELOW IS THE ANS FROM JOSH
+
+SELECT ROUND(SUM(t.so),2) AS sum_so, ROUND(SUM(t.g),2)AS sum_g, (ROUND(SUM(t.so),2)/ROUND(SUM(t.g),2))AS so_per_game,
+ROUND(SUM(t.hr),2)AS sum_hr, ROUND(SUM(t.g),2)AS sum_g, (ROUND(SUM(t.hr),2)/ROUND(SUM(t.g),2))AS hr_per_game,
+            CASE WHEN t.yearid BETWEEN 1920 AND 1929 THEN '1920s'
+	        WHEN t.yearid BETWEEN 1930 AND 1939 THEN '1930s'
+			WHEN t.yearid BETWEEN 1940 AND 1949 THEN '1940s'
+			WHEN t.yearid BETWEEN 1950 AND 1959 THEN '1950s'
+			WHEN t.yearid BETWEEN 1960 AND 1969 THEN '1960s'
+			WHEN t.yearid BETWEEN 1970 AND 1979 THEN '1970s'
+			WHEN t.yearid BETWEEN 1980 AND 1989 THEN '1980s'
+			WHEN t.yearid BETWEEN 1990 AND 1999 THEN '1990s'
+			WHEN t.yearid BETWEEN 2000 AND 2009 THEN '2000s'
+			WHEN t.yearid BETWEEN 2010 AND 2019 THEN '2010s'
+			END AS BY_DECADES
+FROM teams AS t
+WHERE yearid BETWEEN 1920 AND 2019
+GROUP BY BY_DECADES
+ORDER BY BY_DECADES DESC;
+
