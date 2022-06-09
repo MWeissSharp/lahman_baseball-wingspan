@@ -2,54 +2,10 @@
 --in the league for at least 10 years, and who hit at least one home run in 2016. 
 --Report the players' first and last names and the number of home runs they hit in 2016.
 
-SELECT *
-FROM batting
-WHERE yearid=2016
 
-SELECT SUM(hr), playerid,yearid
-FROM Batting
-WHERE yearid=2016
-GROUP BY playerid, yearid
-ORDER BY SUM(hr)DESC
-
---innerjoin player to self
-SELECT SUM(b1.hr), b1.playerid, b1.yearid,SUM(b2.hr), b2.playerid, b2.yearid
-FROM batting as b1
-     INNER JOIN batting as b2 USING (playerid)
-WHERE b1.yearid<b2.yearid
-GROUP BY b1.playerid, b1.yearid,b2.playerid, b2.yearid
-ORDER BY SUM(b1.hr)DESC
-
-Subquery
-rank and partition over
-ordered by home runs
 
 
 --USE A WINDOW???
-SELECT p.namefirst,p.namelast, b.hr
-       (SELECT p.namefirst,p.namelast,b.playerid,b.hr,
-        RANK() OVER(PARTITION BY p.namelast ORDER BY b.hr DESC)
-	    FROM batting as b
-		LEFT JOIN people as p USING(playerid)
-		GROUP BY p.namefirst,p.namelast,b.playerid,b.hr)	 
-FROM batting
-
-
-
-SELECT SUM(hr), playerid,yearid
-FROM Batting
-WHERE yearid=2016
-GROUP BY playerid, yearid
-ORDER BY SUM(hr)DESC
-
------
-SELECT p.namefirst,p.namelast,b.playerid,b.hr,b.yearid,
-         RANK() OVER(PARTITION BY b.playerid ORDER BY b.hr DESC)
-FROM batting as b
-LEFT JOIN people as p USING(playerid)
-WHERE b.yearid=2016
-GROUP BY p.namefirst,p.namelast,b.playerid,b.hr,b.yearid
-
 
 SELECT namefirst,
 	   namelast,
@@ -67,27 +23,7 @@ AND yearid = 2016
 AND career_seasons >= 10;
 
 
-SELECT namefirst,
-	   namelast,
-	   hr AS hr_in2016,
-	   career_seasons,
-	   SUM(hr)AS career_total_hr
-			SELECT namefirst,
-				   namelast,
-				   hr AS hr_in2016,
-				   career_seasons,
-			FROM	(SELECT namefirst,
-							namelast,
-							hr,
-							yearid,
-							EXTRACT(year FROM finalgame::date) - EXTRACT(year FROM debut::date) + 1 AS career_seasons, --this will allow filtering based on carrer length
-							RANK() OVER(PARTITION BY playerid ORDER BY hr DESC) AS player_hr_by_year_rank --this allows filtering for players' best hr year
-					FROM people AS p INNER JOIN batting AS b USING(playerid)
-					WHERE HR > 0) AS ranks --going ahead and filtering out rows where the player didn't have any home runs
-			WHERE player_hr_by_year_rank = 1
-			AND yearid = 2016
-			AND career_seasons >= 10
-			GROUP BY namefirst,namelast,hr_in2016,career_seasons
-FROM
+
+	
 
            
