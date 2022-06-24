@@ -1,7 +1,0 @@
-Select p.playerid, namefirst,namelast,
-	   sb,cs, yearid,
-Concat(Round(((cast(sb as numeric)/(cast(sb as numeric) + cast(cs as numeric)))* 100), 2), '%') as success_rate
-from batting as b
-Inner Join people as p on b.playerid = p.playerid
-Where sb >= 20 and cs notnull and yearid ='2016'
-Order by success_rate DESC

@@ -1,3 +1,0 @@
-SELECT MIN(yearid), MAX(yearid)
-FROM appearances LEFT JOIN teams USING(yearid)
-                 LEFT JOIN collegeplaying USING (yearid)

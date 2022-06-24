@@ -1,8 +1,0 @@
---Question 3: David Price, David Taylor
-Select cplay.playerid, schoolname, namefirst, namelast, namegiven, sum(salary) from schools as s
-Inner join collegeplaying as cplay on cplay.schoolid = s.schoolid
-Inner join people as p on p.playerid = cplay.playerid
-Inner join salaries as sal on sal.playerid = cplay.playerid
-Where schoolname = 'Vanderbilt University'
-Group by cplay.playerid, schoolname, namefirst, namelast, namegiven
-Order by sum(salary) DESC;

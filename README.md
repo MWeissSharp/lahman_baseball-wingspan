@@ -1,3 +1,5 @@
+This was a project that I completed as part of a group with Martin Melgar, Kelly Harthan, and Anjana Hassan. The files I've kept in my repository are those that I created, but I want to acknowledge that we did work collaboratively to navigate hurdles, and I've copied scripts from other class mates into my "other_questions" file, with attribution notes.
+
 ## Lahman Baseball Database Exercise
 - this data has been made available [online](http://www.seanlahman.com/baseball-archive/statistics/) by Sean Lahman
 - you can find a data dictionary [here](http://www.seanlahman.com/files/database/readme2016.txt)
@@ -8,21 +10,21 @@
 
 **Initial Questions**
 
-1. What range of years for baseball games played does the provided database cover? 
+1. What range of years for baseball games played does the provided database cover?
 
 2. Find the name and height of the shortest player in the database. How many games did he play in? What is the name of the team for which he played?
-   
+
 
 3. Find all players in the database who played at Vanderbilt University. Create a list showing each player’s first and last names as well as the total salary they earned in the major leagues. Sort this list in descending order by the total salary earned. Which Vanderbilt player earned the most money in the majors?
-	
+
 
 4. Using the fielding table, group players into three groups based on their position: label players with position OF as "Outfield", those with position "SS", "1B", "2B", and "3B" as "Infield", and those with position "P" or "C" as "Battery". Determine the number of putouts made by each of these three groups in 2016.
-   
+
 5. Find the average number of strikeouts per game by decade since 1920. Round the numbers you report to 2 decimal places. Do the same for home runs per game. Do you see any trends?
-   
+
 
 6. Find the player who had the most success stealing bases in 2016, where __success__ is measured as the percentage of stolen base attempts which are successful. (A stolen base attempt results either in a stolen base or being caught stealing.) Consider only players who attempted _at least_ 20 stolen bases.
-	
+
 
 7.  From 1970 – 2016, what is the largest number of wins for a team that did not win the world series? What is the smallest number of wins for a team that did win the world series? Doing this will probably result in an unusually small number of wins for a world series champion – determine why this is the case. Then redo your query, excluding the problem year. How often from 1970 – 2016 was it the case that a team with the most wins also won the world series? What percentage of the time?
 
@@ -47,5 +49,3 @@
 
 
 13. It is thought that since left-handed pitchers are more rare, causing batters to face them less often, that they are more effective. Investigate this claim and present evidence to either support or dispute this claim. First, determine just how rare left-handed pitchers are compared with right-handed pitchers. Are left-handed pitchers more likely to win the Cy Young Award? Are they more likely to make it into the hall of fame?
-
-  
